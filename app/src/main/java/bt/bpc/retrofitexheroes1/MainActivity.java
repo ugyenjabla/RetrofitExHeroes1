@@ -40,16 +40,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Hero>> call, Response<List<Hero>> response) {
                 List<Hero> heroList = response.body();
-                String[] heroes = new String[heroList.size()];
 
-                //looping through all the heroes and inserting the names inside the string array
-                for (int i = 0; i < heroList.size(); i++) {
-                    heroes[i] = heroList.get(i).getName();
+                listView.setAdapter(new MyAdapter(MainActivity.this,  heroList));
 
-
-                }
-//displaying the string array into listview
-                listView.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, heroes));
             }
                 @Override
             public void onFailure(Call<List<Hero>> call, Throwable t) {
